@@ -1,0 +1,35 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n =  nums.size()-1;
+        int idx = n;
+        for(int i = n;i>0;i--){
+            if(nums[i]>nums[i-1]){
+                idx = i;
+                break;
+            }
+            else
+                idx--;
+        }
+        if(idx==0){
+            sort(nums.begin(),nums.end());
+        }
+        else{
+            int l = idx-1;
+            long long int mindiff = INT_MAX;
+            int k;
+            for(int j = idx;j<=n;j++){
+                if(nums[idx-1]<nums[j]){
+                    if(mindiff > nums[j]-nums[idx-1]){
+                        k  = j;
+                        mindiff = nums[j]-nums[idx-1];
+                    }
+                }
+            }
+            int temp = nums[l];
+            nums[l] = nums[k];
+            nums[k] = temp;
+            sort(nums.begin()+l + 1,nums.end());
+        }
+    }
+};
