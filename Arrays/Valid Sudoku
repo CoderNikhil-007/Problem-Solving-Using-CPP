@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        unordered_map<string, int> u;
+        for(int i = 0;i<9;i++){
+            for(int j = 0;j<9;j++){
+                if(board[i][j]!='.'){
+                    string row = "Row" + to_string(i) + to_string(board[i][j]);
+                    string col = "Col" + to_string(j) + to_string(board[i][j]);
+                    string box = "Box" + to_string(((i/3)*3 - (j/3))) + to_string(board[i][j]);
+                    if(u.find(row) != u.end() || u.find(col) != u.end() || u.find(box) != u.end()){
+                        return false;
+                    }
+                    else{
+                        u.insert(make_pair(row, 1));
+                        u.insert(make_pair(col, 1));
+                        u.insert(make_pair(box, 1));
+                    }
+                }
+            }
+        }
+        return true;
+    }
+};
