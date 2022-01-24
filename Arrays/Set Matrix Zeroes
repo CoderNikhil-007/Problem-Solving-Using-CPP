@@ -1,0 +1,31 @@
+class Solution {
+public:
+    void makerow0(vector<vector<int>>& matrix,int row,int n){
+        for(int i = 0;i<=n;i++)
+            matrix[row][i] = 0;
+        
+    }
+    void makecol0(vector<vector<int>>& matrix,int col,int m){
+        for(int i = 0;i<=m;i++)
+            matrix[i][col] =0;
+    }
+    void setZeroes(vector<vector<int>>& matrix) {
+        int top  = 0;
+        int m = matrix.size()-1;
+        int n = matrix[0].size()-1;
+        vector<pair<int,int>> store;
+        while(top<=m){
+            for(int j = 0;j<=n;j++){
+                if(matrix[top][j]==0){
+                    store.push_back({top,j});
+                }
+            }
+            top++;
+        }
+        for(int i = 0;i<store.size();i++){
+            makerow0(matrix,store[i].first,n);
+            makecol0(matrix,store[i].second,m);
+        }
+        
+    }
+};
