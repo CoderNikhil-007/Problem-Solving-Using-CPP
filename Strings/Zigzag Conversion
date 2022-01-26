@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string convert(string s, int n) {
+        if(n==1){
+            return s;
+        }
+        vector<string> arr(n,"");
+        int j = 0;
+        bool boolf = true;
+        for(int i = 0;i<s.length();i++){
+            arr[j]+=s[i];
+            if(boolf){
+                j++;
+            }
+            else{
+                j--;
+            }
+            if(boolf && j==n-1)
+                boolf = false;
+            else if(!boolf && j==0)
+                boolf = true;
+        }
+        string ans ="";
+        for(int i = 0;i<n;i++)
+            ans+=arr[i];
+        
+        return ans;
+    }
+};
