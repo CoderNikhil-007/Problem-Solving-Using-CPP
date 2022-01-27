@@ -1,0 +1,83 @@
+class Solution {
+public:
+    string multi(string M,int i){
+        string ans;
+        for(int a =0;a<i;a++){
+            ans+=M;
+        }
+        return ans;
+    }
+    string intToRoman(int num) {
+        string ans = "";
+        int i = num/1000;
+        string temp1 = multi("M",i);
+        ans+=temp1;
+        num = num%1000;
+        int j = num/500;
+        if(num/100==9){
+            string temp2 = "CM";
+            num = num%100;
+            ans+=temp2;
+        }
+        else{
+            string temp2 = multi("D",j);
+            ans+=temp2;
+            num = num%500;
+        }
+        int k = num/100;
+        if(k==4){
+            string temp3 = "CD";
+            ans+=temp3;
+            num = num%100;
+        }
+        else{
+            string temp3 = multi("C",k);
+            ans+=temp3;
+            num = num%100;
+        }
+        int l = num/50;
+        if(num/10==9){
+            string temp4 = "XC";
+            ans+=temp4;
+            num = num%10;
+        }
+        else{
+            string temp4 = multi("L",l);
+            ans+=temp4;
+            num = num%50;
+        }
+        int m = num/10;
+        if(m==4){
+            string temp5 = "XL";
+            ans+=temp5;
+            num = num%10;
+        }
+        else{
+            string temp5 = multi("X",m);
+            ans+=temp5;
+            num = num%10;
+        }
+        int n = num/5;
+        if(num==9){
+            string temp6 = "IX";
+            ans+=temp6;
+            num = 0;
+        }
+        else if(num==4){
+            string temp6 = "IV";
+            ans+=temp6;
+            num = 0;
+        }
+        else{
+            string temp6 = multi("V",n);
+            ans+=temp6;
+            num = num%5;
+        }
+        int o = num;
+        string temp7 = multi("I",o);
+        ans+=temp7;
+        
+        return ans;
+        
+    }
+};
