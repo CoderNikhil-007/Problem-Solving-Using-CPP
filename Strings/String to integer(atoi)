@@ -1,0 +1,49 @@
+constexpr char whitespace = ' ';
+class Solution {
+public:
+    int myAtoi(string s) {
+        // edge case
+        if(s.empty()){ return 0; }
+
+        int index = 0;
+        int result = 0;
+        
+        // forward increment to skip leading whitespace
+        while(s[index] == whitespace){ index++; }
+        
+        // verify sign char if present in string
+        int sign = (s[index] == '-') ? -1 : 1;
+        
+        // forward increment if sign char was found
+        if(s[index] == '-' || s[index] == '+'){ index++; }
+
+        while(index < s.length()){
+
+          const char c = s[index];
+          const int value = (c - '0');
+
+          // if char in range
+          if(value >= 0 && value <= 9){
+                  
+              // edge case: check that multiplying current result value
+              // will not result in exceeding INT_MAX. We modulo INT_MAX
+              // by 10 to verify that the value to be added to result does
+              // not exceed the last digit of INT_MAX, if result is equal 
+			  // to INT_MAX/10
+              if(result > INT_MAX/10 || result == INT_MAX/10 && value > INT_MAX%10){
+                  return sign > 0 ? INT_MAX : INT_MIN;
+              }
+              
+              result = result*10 + value;
+          } else {
+              
+              // bail from loop if non-number encountered
+              break;
+          }
+
+          index++;
+        }
+
+        return result * sign;
+    }
+};
