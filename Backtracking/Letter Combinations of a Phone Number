@@ -1,0 +1,31 @@
+class Solution {
+public:
+    void solve(string digits,vector<string> &digit,string asf,int a,vector<string> &solution){
+        if(a == digits.length()){
+            string temp = asf;
+            solution.push_back(temp);
+            return;
+        }
+        for(int i = 0;i<digit[digits[a]-'0'].length();i++){
+            solve(digits,digit,asf+digit[digits[a]-'0'][i],a+1,solution);
+        }
+        
+    }
+    vector<string> letterCombinations(string digits) {
+        vector<string> digit(10,"");
+        digit[2] = "abc";
+        digit[3] = "def";
+        digit[4] = "ghi";
+        digit[5] = "jkl";
+        digit[6] = "mno";
+        digit[7] = "pqrs";
+        digit[8] = "tuv";
+        digit[9] = "wxyz";
+        vector<string> solution;
+        if(digits == ""){
+            return solution;
+        }
+        solve(digits,digit,"",0,solution);
+        return solution;
+    }
+};
