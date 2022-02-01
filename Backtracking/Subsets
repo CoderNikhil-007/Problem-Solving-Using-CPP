@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void solve(vector<int> &nums,vector<int> &asf,int i){
+        ans.push_back(asf);
+        for(int k = i;k<nums.size();k++){
+            asf.push_back(nums[k]);
+            solve(nums,asf,k+1);
+            asf.pop_back();
+        }
+    }
+    vector<vector<int>> subsets(vector<int>& nums){
+        vector<int> asf;
+        solve(nums,asf,0);
+        return ans;
+    }
+};
