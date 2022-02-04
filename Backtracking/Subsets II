@@ -1,0 +1,25 @@
+class Solution {
+public:
+     vector<vector<int>> ans;
+     void solve(vector<int> &nums,vector<int> &asf,int i){
+        ans.push_back(asf);
+        for(int k = i;k<nums.size();k++){
+            if(k==i){
+                asf.push_back(nums[k]);
+                solve(nums,asf,k+1);
+                asf.pop_back();
+            }
+            else if(nums[k]!=nums[k-1]){
+                asf.push_back(nums[k]);
+                solve(nums,asf,k+1);
+                asf.pop_back();
+            }
+        }
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<int> asf;
+        sort(nums.begin(),nums.end());
+        solve(nums,asf,0);
+        return ans;
+    }
+};
