@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<string> res;
+    
+    void genIP(string ip, string up, int dots){
+        if(ip.length() == 0 && dots == 4){
+            string temp = up.substr(0, up.length() - 1);
+            res.push_back(temp);
+            return;
+        }
+        if(dots > 4 ){
+            return;
+        }
+
+        for(int i=1; i<=3; i++){
+            if(ip.length() >= i && stoi(ip.substr(0, i)) >= 0 && stoi(ip.substr(0, i)) <= 255)
+            {
+                if(ip.substr(0, i).length() == 1 || ip.substr(0, i).length() > 1 && ip.substr(0, i).substr(0,1) != "0")
+                    genIP(ip.substr(i), up + ip.substr(0, i) + ".", dots + 1);
+            }
+        }
+    }
+    
+    vector<string> restoreIpAddresses(string s) {
+        genIP(s, "", 0);
+        return res;
+    }
+};
