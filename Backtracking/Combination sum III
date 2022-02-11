@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    vector<int> asf;
+    void solve(int k,int n,int idx,vector<int> &nums){
+        int size=asf.size();
+        if(n<0 or k<size){
+            return;
+        }
+        if(n==0 && k==size){
+            ans.push_back(asf);
+            return;
+        }
+        for(int i = idx;i<nums.size();i++){
+            if(nums[i]>n){
+                break;
+            }
+            asf.push_back(nums[i]);
+            solve(k,n-nums[i],i+1,nums);
+            asf.pop_back();     
+        }
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<int> nums = {1,2,3,4,5,6,7,8,9};
+        solve(k,n,0,nums);
+        return ans;
+    }
+};
