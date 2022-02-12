@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int ans;
+    void solve(vector<int>& nums,int target,int i,int asf){
+        if(i==nums.size() && asf==target){
+            ans++;
+            return;
+        }
+        if(i==nums.size()){
+            return;
+        }
+        solve(nums,target,i+1,asf-nums[i]);
+        solve(nums,target,i+1,asf+nums[i]);
+    }
+    int findTargetSumWays(vector<int>& nums, int target) {
+        solve(nums,target,0,0);
+        return ans;
+    }
+};
