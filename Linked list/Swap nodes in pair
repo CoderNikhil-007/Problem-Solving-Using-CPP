@@ -1,0 +1,14 @@
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(head==NULL || head->next==NULL)
+            return head;
+        if(head){
+            int temp=head->val;
+            head->val=head->next->val;   
+            head->next->val=temp;
+            head->next->next=swapPairs(head->next->next);
+        }
+    return head;
+    }
+};
