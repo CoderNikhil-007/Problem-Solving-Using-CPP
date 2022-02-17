@@ -1,0 +1,45 @@
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        if(!head || !head->next) return head;
+        ListNode* h1 = NULL,*h2 = NULL,*t1 = NULL,*t2 = NULL;
+        ListNode* temp = head;
+        while(temp){
+            if(temp->val<x){
+                if(!h1){
+                    h1 = temp;
+                    t1 = temp;
+                }
+                else{
+                    t1->next = temp;
+                    t1 = t1->next;
+                }
+                temp = temp->next;
+            }
+            else{
+                if(!h2){
+                    h2 = temp;
+                    t2 = temp;
+                }
+                else{
+                    t2->next = temp;
+                    t2 = t2->next;
+                }
+                temp = temp->next;
+            }
+        }
+        
+        if(h1){
+            if(h2)
+                t1->next = h2;
+            if(!h2)
+                t1->next = NULL;
+            if(t2)
+                t2->next = NULL;
+            return h1;
+        }
+        else{
+            return h2;
+        }
+    }
+};
