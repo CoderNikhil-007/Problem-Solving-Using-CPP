@@ -1,0 +1,36 @@
+class Solution {
+public:
+    ListNode* SortedMerge(ListNode* a, ListNode* b)
+    {
+        ListNode* result = NULL;
+
+        if (a == NULL)
+            return b;
+        else if (b == NULL)
+            return a;
+
+        if (a->val <= b->val) {
+            result = a;
+            result->next = SortedMerge(a->next, b);
+        }
+        else {
+            result = b;
+            result->next = SortedMerge(a, b->next);
+        }
+        return result;
+    }
+    ListNode* divideAndConquer(vector<ListNode*>& lists, int left, int right) {
+        if(left == right) {
+            return lists[left];
+        }
+        int mid = left + (right -left)/2;
+        ListNode* leftList = divideAndConquer(lists, left, mid);
+        ListNode* rightList = divideAndConquer(lists, mid + 1, right);
+        return SortedMerge(leftList, rightList);
+    }
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.size() == 0)
+            return NULL;
+        return divideAndConquer(lists, 0, lists.size() - 1);
+    }
+};
