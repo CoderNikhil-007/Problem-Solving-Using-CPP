@@ -1,0 +1,48 @@
+class Solution {
+public:
+    ListNode* findmid(ListNode* head){
+        if(!head)
+            return NULL;
+        ListNode* fast = head,*slow = head;
+        while(fast->next && fast->next->next){
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        return slow;
+    }
+    ListNode *mergeTwoSortedLinkedLists(ListNode *a, ListNode *b){
+        //Write your code here
+        ListNode* result = NULL;
+
+        /* Base cases */
+        if (a == NULL)
+            return(b);
+        else if (b == NULL)
+            return(a);
+
+        /* Pick either a or b, and recur */
+        if (a->val <= b->val)
+        {
+            result = a;
+            result->next = mergeTwoSortedLinkedLists(a->next, b);
+        }
+        else
+        {
+            result = b;
+            result->next = mergeTwoSortedLinkedLists(a, b->next);
+        }
+        return(result);   
+}
+    ListNode* sortList(ListNode* head) {
+        if(head==NULL || head->next == NULL){
+            return head;
+        }
+        ListNode *half1 =  head;
+        ListNode *mid = findmid(head);
+        ListNode* half2 = mid->next;
+        mid->next = NULL;
+        ListNode* finalh = mergeTwoSortedLinkedLists(sortList(half1),sortList(half2));
+        return finalh;
+        
+    }
+};
