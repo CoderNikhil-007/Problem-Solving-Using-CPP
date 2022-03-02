@@ -1,0 +1,30 @@
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(!head)return head;
+        ListNode* newH = NULL,*tail = NULL;
+        ListNode* temp  =  head;
+        while(temp){
+            ListNode* prev = temp;
+            temp = prev->next;
+            bool flag = true;
+            while(temp && temp->val == prev->val){
+                temp = temp->next;
+                flag = false;
+            }
+            if(flag){
+                if(!newH){
+                    tail = prev;
+                    newH  = prev;
+                }
+                else{
+                    tail->next = prev;
+                    tail = tail->next;
+                }
+            }
+        }
+        if(tail)
+            tail->next = NULL;
+        return newH;
+    }
+};
