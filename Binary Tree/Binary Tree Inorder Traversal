@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> ans;
+    void inot(TreeNode* root){
+        if(root==NULL){
+            return;
+        }
+        inot(root->left);
+        ans.push_back(root->val);
+        inot(root->right);
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        inot(root);
+        return ans;
+    }
+};
